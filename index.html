@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ru" style="background:#f0fdfa; color:#134e4a; color-scheme:light only;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="theme-color" content="#f0fdfa">
+    <title>yooapp.ru — Технические работы</title>
+
+    <!-- Favicon (SVG, без отдельного файла) -->
+    <link rel="icon" type="image/svg+xml"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2314b8a6'/%3E%3Cstop offset='1' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='19' r='4.5' fill='white'/%3E%3Crect x='28.5' y='27' width='7' height='24' rx='3.5' fill='white'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2314b8a6'/%3E%3Cstop offset='1' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ccircle cx='32' cy='19' r='4.5' fill='white'/%3E%3Crect x='28.5' y='27' width='7' height='24' rx='3.5' fill='white'/%3E%3C/svg%3E">
+
+    <!-- Критический CSS: применяется ДО загрузки шрифтов -->
+    <style>
+        html {
+            background: #f0fdfa !important;
+            color-scheme: light only !important;
+            overflow-x: hidden;
+        }
+        body {
+            margin: 0;
+            background: #f0fdfa !important;
+            color: #134e4a;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            color-scheme: light only;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: #f0fdfa;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #f0fdfa 0%, #ccfbf1 35%, #99f6e4 65%, #d1fae5 100%);
+            background-color: #f0fdfa;
+            padding: 20px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-left: max(20px, env(safe-area-inset-left));
+            padding-right: max(20px, env(safe-area-inset-right));
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 620px;
+            height: 620px;
+            background: #99f6e4;
+            top: -220px;
+            right: -140px;
+            opacity: 0.7;
+            animation: float 14s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 520px;
+            height: 520px;
+            background: #a7f3d0;
+            bottom: -200px;
+            left: -140px;
+            opacity: 0.65;
+            animation: float 17s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: transform;
+            isolation: isolate;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 32px;
+            padding: 56px 44px;
+            box-shadow: 0 30px 60px -20px rgba(13, 148, 136, 0.15),
+                        0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+        }
+
+        .logo {
+            display: inline-block;
+            margin-bottom: 36px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            color: #134e4a;
+            line-height: 1;
+        }
+
+        .logo span {
+            color: #0d9488;
+        }
+
+        .clock-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .clock {
+            --size: 104px;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle at 50% 32%, #ffffff 0%, #f0fdfa 55%, #ccfbf1 100%);
+            box-shadow:
+                0 0 0 5px rgba(255, 255, 255, 0.95),
+                0 0 0 6px rgba(45, 212, 191, 0.22),
+                0 18px 36px -14px rgba(20, 184, 166, 0.5),
+                inset 0 3px 8px rgba(255, 255, 255, 0.95),
+                inset 0 -6px 12px rgba(45, 212, 191, 0.12);
+            flex-shrink: 0;
+        }
+
+        .ticks {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .tick {
+            position: absolute;
+            inset: 0;
+            transform: rotate(calc(var(--i) * 30deg));
+        }
+
+        .tick::before {
+            content: '';
+            position: absolute;
+            top: calc(var(--size) * 0.085);
+            left: 50%;
+            width: 2px;
+            height: calc(var(--size) * 0.055);
+            margin-left: -1px;
+            border-radius: 2px;
+            background: rgba(45, 212, 191, 0.45);
+        }
+
+        .tick.major::before {
+            width: 2.5px;
+            height: calc(var(--size) * 0.08);
+            margin-left: -1.25px;
+            background: rgba(13, 148, 136, 0.7);
+        }
+
+        .hand {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            transform-origin: 50% 100%;
+            border-radius: 100px;
+            will-change: transform;
+        }
+
+        .hand.hour {
+            width: 4.5px;
+            height: calc(var(--size) * 0.25);
+            margin-left: -2.25px;
+            background: linear-gradient(180deg, #115e59, #0f766e);
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+            z-index: 1;
+        }
+
+        .hand.minute {
+            width: 3.5px;
+            height: calc(var(--size) * 0.33);
+            margin-left: -1.75px;
+            background: linear-gradient(180deg, #0f766e, #0d9488);
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+            z-index: 2;
+        }
+
+        .hand.second {
+            width: 1.8px;
+            height: calc(var(--size) * 0.36);
+            margin-left: -0.9px;
+            background: linear-gradient(180deg, #2dd4bf, #0d9488);
+            box-shadow: 0 0 8px rgba(20, 184, 166, 0.55);
+            z-index: 3;
+        }
+
+        .hand.second::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: calc(var(--size) * -0.08);
+            width: 1.8px;
+            height: calc(var(--size) * 0.08);
+            margin-left: -0.9px;
+            background: #0d9488;
+            border-radius: 100px;
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 11px;
+            height: 11px;
+            margin: -5.5px 0 0 -5.5px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #2dd4bf, #0f766e);
+            box-shadow:
+                0 0 0 2px rgba(255, 255, 255, 0.95),
+                0 2px 6px rgba(13, 148, 136, 0.45);
+            z-index: 4;
+        }
+
+        h1 {
+            font-size: clamp(24px, 5.5vw, 36px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: clamp(15px, 2vw, 17px);
+            line-height: 1.65;
+            margin-bottom: 16px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subtitle strong {
+            color: #0f766e;
+            font-weight: 600;
+        }
+
+        .details {
+            font-size: clamp(14px, 1.8vw, 15px);
+            line-height: 1.75;
+            margin-bottom: 40px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .details strong {
+            color: #0f766e;
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.35), transparent);
+            margin-bottom: 32px;
+        }
+
+        .social-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f766e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #0f766e;
+            background: #ffffff;
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px -4px rgba(20, 184, 166, 0.18);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .social-btn:hover {
+            background: linear-gradient(135deg, #14b8a6, #10b981);
+            border-color: transparent;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 26px -10px rgba(20, 184, 166, 0.5);
+        }
+
+        .social-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            margin-top: 32px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 48px 32px; border-radius: 28px; }
+            body::before { width: 480px; height: 480px; top: -180px; right: -120px; }
+            body::after  { width: 400px; height: 400px; bottom: -160px; left: -120px; }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+                padding-top: max(16px, env(safe-area-inset-top));
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
+            .container {
+                padding: 40px 22px;
+                border-radius: 24px;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+            .logo { margin-bottom: 28px; font-size: 24px; }
+            .clock-wrapper { margin-bottom: 26px; }
+            .clock { --size: 84px; }
+            h1 { margin-bottom: 14px; }
+            .details { margin-bottom: 32px; }
+            .divider { margin-bottom: 26px; }
+            .social-title { margin-bottom: 14px; }
+            .social-links { flex-direction: column; gap: 10px; }
+            .social-btn { width: 100%; padding: 14px 20px; font-size: 15px; }
+            .footer { margin-top: 26px; font-size: 12px; }
+            body::before, body::after { filter: blur(70px); animation: none; }
+        }
+
+        @media (max-width: 360px) {
+            .container { padding: 32px 18px; }
+            .clock { --size: 74px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 14px; }
+            .details { font-size: 13px; }
+            .social-btn { font-size: 14px; padding: 12px 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Страховка от принудительной тёмной темы */
+        @media (prefers-color-scheme: dark) {
+            html, body {
+                background-color: #f0fdfa !important;
+                background-image: linear-gradient(160deg, #f0fdfa 0%, #ccfbf1 35%, #99f6e4 65%, #d1fae5 100%) !important;
+                color: #134e4a !important;
+                color-scheme: light only !important;
+            }
+            .container {
+                background: #ffffff !important;
+                border-color: rgba(255, 255, 255, 0.95) !important;
+            }
+            h1, .logo { color: #0f766e !important; }
+            .subtitle, .details, .footer, .social-title { color: #115e59 !important; }
+            .social-btn {
+                background: #ffffff !important;
+                color: #0f766e !important;
+                border-color: rgba(45, 212, 191, 0.35) !important;
+            }
+            .clock {
+                background: radial-gradient(circle at 50% 32%, #ffffff 0%, #f0fdfa 55%, #ccfbf1 100%) !important;
+            }
+        }
+    </style>
+</head>
+<body style="background:#f0fdfa;">
+    <div class="container">
+        <div class="logo">yoo<span>app</span></div>
+
+        <div class="clock-wrapper">
+            <div class="clock" role="img" aria-label="Часы, показывающие текущее время">
+                <div class="ticks" id="ticks"></div>
+                <div class="hand hour" id="hourHand"></div>
+                <div class="hand minute" id="minuteHand"></div>
+                <div class="hand second" id="secondHand"></div>
+                <div class="clock-center"></div>
+            </div>
+        </div>
+
+        <h1>Идут технические работы</h1>
+
+        <p class="subtitle">
+            Сайт <strong>yooapp.ru</strong> и мобильное приложение временно недоступны.
+        </p>
+
+        <p class="details">
+            Причиной стала <strong>авария на стороне хостинг-провайдера</strong>, где размещены
+            наш бэкенд и база данных. Специалисты уже устраняют неполадки — как только доступ
+            восстановится, сервис заработает в полном объёме. Все данные сохранены.
+            Приносим извинения за неудобства.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="social-title">Следите за обновлениями</p>
+
+        <div class="social-links">
+            <!-- Замените ссылки на актуальные сообщества yooapp -->
+            <a href="https://vk.ru/yooapp" target="_blank" rel="noopener" class="social-btn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H.916c-.713 0-.854.329-.854.684 0 .806 2.104 4.86 4.658 8.267 2.313 3.084 4.81 2.946 6.94 2.946z"/>
+                </svg>
+                ВКонтакте
+            </a>
+            <a href="https://max.ru/channel_yooapp" target="_blank" rel="noopener" class="social-btn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 1.79.473 3.47 1.302 4.925L2 22l5.196-1.271A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm4.74 13.599c-.176.49-1.03.945-1.42.98-.39.036-.755.184-2.528-.527-2.14-.86-3.5-3.03-3.606-3.17-.106-.14-.86-1.145-.86-2.184 0-1.04.55-1.55.745-1.762.194-.21.423-.263.564-.263.14 0 .282.001.404.008.13.006.303-.05.474.362.176.423.598 1.459.65 1.565.053.106.088.23.018.37-.07.14-.106.227-.21.35-.106.123-.222.276-.318.37-.106.106-.216.22-.093.432.123.21.546.902 1.171 1.46.804.717 1.483.94 1.693 1.046.21.106.334.088.457-.053.123-.14.528-.616.669-.827.14-.21.281-.176.474-.106.194.07 1.229.58 1.44.686.21.106.35.159.404.247.053.088.053.51-.123 1z"/>
+                </svg>
+                MAX
+            </a>
+        </div>
+
+        <div class="footer">
+            © 2026 yooapp.ru
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var ticksEl    = document.getElementById('ticks');
+            var hourHand   = document.getElementById('hourHand');
+            var minuteHand = document.getElementById('minuteHand');
+            var secondHand = document.getElementById('secondHand');
+
+            var frag = document.createDocumentFragment();
+            for (var i = 0; i < 12; i++) {
+                var tick = document.createElement('span');
+                tick.className = 'tick' + (i % 3 === 0 ? ' major' : '');
+                tick.style.setProperty('--i', i);
+                frag.appendChild(tick);
+            }
+            ticksEl.appendChild(frag);
+
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function render() {
+                var now = new Date();
+                var ms  = now.getMilliseconds();
+                var s   = now.getSeconds() + ms / 1000;
+                var m   = now.getMinutes() + s / 60;
+                var h   = (now.getHours() % 12) + m / 60;
+
+                secondHand.style.transform = 'rotate(' + (s * 6) + 'deg)';
+                minuteHand.style.transform = 'rotate(' + (m * 6) + 'deg)';
+                hourHand.style.transform   = 'rotate(' + (h * 30) + 'deg)';
+            }
+
+            if (reduceMotion) {
+                (function tick() {
+                    render();
+                    setTimeout(tick, 1000 - (Date.now() % 1000));
+                })();
+            } else {
+                (function loop() {
+                    render();
+                    requestAnimationFrame(loop);
+                })();
+            }
+        })();
+    </script>
+</body>
+</html>
